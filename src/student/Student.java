@@ -97,6 +97,8 @@ public class Student extends Person {
         return false;
     }
     
+    
+    // check Student ID is already exist
     public boolean isIdExist(String phone) {
         try {
             ps = con.prepareStatement("select * from student where phone = ?");
