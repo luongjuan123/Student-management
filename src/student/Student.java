@@ -96,6 +96,21 @@ public class Student extends Person {
         }
         return false;
     }
+    
+    public boolean isIdExist(String phone) {
+        try {
+            ps = con.prepareStatement("select * from student where phone = ?");
+            ps.setString(1, phone);
+
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return true;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Student.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
 
     // get all the student values from database student table
     public void getStudentValue(JTable table, String searchValue) {
