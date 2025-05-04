@@ -99,10 +99,10 @@ public class Student extends Person {
     
     
     // check Student ID is already exist
-    public boolean isIdExist(String phone) {
+    public boolean isIdExist(int id) {
         try {
-            ps = con.prepareStatement("select * from student where phone = ?");
-            ps.setString(1, phone);
+            ps = con.prepareStatement("select * from student where id = ?");
+            ps.setInt(1, id);
 
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
@@ -141,6 +141,8 @@ public class Student extends Person {
             Logger.getLogger(Student.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    //Student data update
 
     public void update(int id, String sname, String date, String gender, String email, String phone,
             String father, String mother, String address, String imagePath) {
@@ -164,5 +166,44 @@ public class Student extends Person {
         } catch (SQLException ex) {
             Logger.getLogger(Student.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    
+    //student data delete
+    
+    public void delete(int id) {
+        int yesOrNo = JOptionPane.showConfirmDialog(
+        null,
+        "Courses and score records will also be deleted",
+        "Student Delete",
+        JOptionPane.OK_CANCEL_OPTION,
+        JOptionPane.WARNING_MESSAGE
+    );
+
+    if (yesOrNo == JOptionPane.OK_OPTION) {
+        String input = JOptionPane.showInputDialog(null, "Please re-enter the student ID to confirm:");
+
+        if (input != null) { // Nếu người dùng không nhấn Cancel
+            try {
+                int confirmId = Integer.parseInt(input.trim());
+
+                if (confirmId == id) {
+                    PreparedStatement ps = con.prepareStatement("DELETE FROM student WHERE id = ?");
+                    ps.setInt(1, id);
+                    if (ps.executeUpdate() > 0) {
+                        JOptionPane.showMessageDialog(null, "Student deleted successfully.");
+                    }
+                    
+                } else {
+                    JOptionPane.showMessageDialog(null, "ID does not match. Deletion canceled.");
+                }
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "Invalid input. Please enter a valid number.");
+            } catch (SQLException ex) {
+                Logger.getLogger(Student.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(null, "Database error occurred.");
+            }
+        }
+    }
     }
 }

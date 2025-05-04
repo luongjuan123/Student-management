@@ -6,15 +6,18 @@ package student;
 
 import java.awt.Color;
 import java.awt.Image;
+import java.awt.print.PrinterException;
 import java.io.File;
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
+import java.text.MessageFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 import utils.Standardize;
@@ -236,6 +239,7 @@ public class Home extends javax.swing.JFrame {
 
         jPanel3.setBackground(new java.awt.Color(255, 102, 102));
 
+        jTextField1.setBackground(new java.awt.Color(204, 204, 204));
         jTextField1.setFont(new java.awt.Font("Noto Sans", 1, 15)); // NOI18N
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -452,6 +456,11 @@ public class Home extends javax.swing.JFrame {
 
         jButton3.setFont(new java.awt.Font("Noto Mono", 1, 15)); // NOI18N
         jButton3.setText("Refresh");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
@@ -546,10 +555,20 @@ public class Home extends javax.swing.JFrame {
         jButton6.setBackground(new java.awt.Color(204, 204, 0));
         jButton6.setFont(new java.awt.Font("Noto Mono", 1, 15)); // NOI18N
         jButton6.setText("Delete");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
 
         jButton7.setBackground(new java.awt.Color(204, 204, 0));
         jButton7.setFont(new java.awt.Font("Noto Mono", 1, 15)); // NOI18N
         jButton7.setText("Print");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
 
         jButton8.setBackground(new java.awt.Color(204, 204, 0));
         jButton8.setFont(new java.awt.Font("Noto Mono", 1, 15)); // NOI18N
@@ -1772,7 +1791,13 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_searchFieldActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+        if (searchField.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please enter student ID");
+        } else {
+            jTable1.setModel(new DefaultTableModel(null, new Object[]{"Student's ID", "Student's name", "Date of Birth", "Gender", "Email", "Phone number",
+                "Father's name", "Mother's name", "Address", "Image path"}));
+            student.getStudentValue(jTable1, searchField.getText());
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jTextField8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField8ActionPerformed
@@ -1861,8 +1886,50 @@ public class Home extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         if (isEmptyStudent()) {
-            if (!student.isEmailExist(jTextField3.getText())) {
-                if (!student.isPhoneExist(jTextField4.getText())) {
+            if (!(student.isIdExist(Integer.parseInt(jTextField1.getText())))) {
+                if (!student.isEmailExist(jTextField3.getText())) {
+                    if (!student.isPhoneExist(jTextField4.getText())) {
+                        String name = Standardize.name(jTextField2.getText());
+                        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                        String date = dateFormat.format(jDateChooser1.getDate());
+                        String gender = jComboBox1.getSelectedItem().toString();
+                        String email = jTextField3.getText();
+                        String phone = jTextField4.getText();
+                        String father = jTextField5.getText();
+                        String mother = jTextField6.getText();
+                        String address = jTextField7.getText();
+                        String imagePath = ""; // Đảm bảo biến này có giá trị hợp lệ khi cần thiết
+
+                        student.insert(Integer.parseInt(jTextField1.getText()), name, date, gender, email, phone, father, mother, address, imagePath);
+                        jTable1.setModel(new DefaultTableModel(null, new Object[]{"Student's ID", "Student's name", "Date of Birth", "Gender", "Email", "Phone number",
+                            "Father's name", "Mother's name", "Address", "Image path"}));
+                        student.getStudentValue(jTable1, "");
+                        clearStudent();
+                    } else {
+                        JOptionPane.showMessageDialog(this, "This phone number is already exists");
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(this, "This email address is already exists");
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "This student ID already exists");
+            }
+        }
+
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jTextField4KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField4KeyTyped
+        if (!Character.isDigit(evt.getKeyChar())) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTextField4KeyTyped
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+
+        if (isEmptyStudent()) {
+            int id1 = Integer.parseInt(jTextField1.getText());
+            if (student.isIdExist(id1)) {
+                if (!check()) {
                     int id = Integer.parseInt(jTextField1.getText());
                     String name = Standardize.name(jTextField2.getText());
                     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -1873,47 +1940,44 @@ public class Home extends javax.swing.JFrame {
                     String father = jTextField5.getText();
                     String mother = jTextField6.getText();
                     String address = jTextField7.getText();
-                    student.insert(id, name, date, gender, email, phone, father, mother, address, imagePath);
+                    student.update(id, name, date, gender, email, phone, father, mother, address, imagePath);
                     jTable1.setModel(new DefaultTableModel(null, new Object[]{"Student's ID", "Student's name", "Date of Birth", "Gender", "Email", "Phone number",
                         "Father's name", "Mother's name", "Address", "Image path"}));
                     student.getStudentValue(jTable1, "");
                     clearStudent();
-                } else {
-                    JOptionPane.showMessageDialog(this, "This phone number is already exists");
                 }
             } else {
-                JOptionPane.showMessageDialog(this, "This email address is already exists");
+                JOptionPane.showMessageDialog(this, "This student ID doesn't exist");
             }
 
         }
-    }//GEN-LAST:event_jButton4ActionPerformed
-
-    private void jTextField4KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField4KeyTyped
-        if (!Character.isDigit(evt.getKeyChar())) {
-            evt.consume();
-        }
-    }//GEN-LAST:event_jTextField4KeyTyped
-
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        if (isEmptyStudent()) {
-            int id = Integer.parseInt(jTextField1.getText());
-            String name = Standardize.name(jTextField2.getText());
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-            String date = dateFormat.format(jDateChooser1.getDate());
-            String gender = jComboBox1.getSelectedItem().toString();
-            String email = jTextField3.getText();
-            String phone = jTextField4.getText();
-            String father = jTextField5.getText();
-            String mother = jTextField6.getText();
-            String address = jTextField7.getText();
-            student.update(id, name, date, gender, email, phone, father, mother, address, imagePath);
-            jTable1.setModel(new DefaultTableModel(null, new Object[]{"Student's ID", "Student's name", "Date of Birth", "Gender", "Email", "Phone number",
-                "Father's name", "Mother's name", "Address", "Image path"}));
-            student.getStudentValue(jTable1, "");
-            clearStudent();
-        }
     }//GEN-LAST:event_jButton5ActionPerformed
 
+    public boolean check() {
+        String newEmail = jTextField3.getText();
+        String newPhone = jTextField4.getText();
+        String oldEmail = model.getValueAt(rowIndex, 4).toString();
+        String oldPhone = model.getValueAt(rowIndex, 5).toString();
+        if (oldEmail.equals(newEmail) && oldPhone.equals(newPhone)) {
+            return false;
+        } else {
+            if (!newEmail.equals(oldEmail)) {
+                boolean x = student.isEmailExist(newEmail);
+                if (x) {
+                    JOptionPane.showMessageDialog(this, "This Email already exists");
+                }
+                return x;
+            }
+            if (!newPhone.equals(oldPhone)) {
+                boolean x = student.isPhoneExist(newPhone);
+                if (x) {
+                    JOptionPane.showMessageDialog(this, "This Phone number already exists");
+                }
+                return x;
+            }
+        }
+        return false;
+    }
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         model = (DefaultTableModel) jTable1.getModel();
         rowIndex = jTable1.getSelectedRow();
@@ -1941,6 +2005,37 @@ public class Home extends javax.swing.JFrame {
         jLabel11.setIcon(imageAdjust(path, null));//get image path and call imageAjust method convert path to imageIcon
 
     }//GEN-LAST:event_jTable1MouseClicked
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        int id = Integer.parseInt(jTextField1.getText());
+        if (student.isIdExist(id)) {
+            student.delete(id);
+            jTable1.setModel(new DefaultTableModel(null, new Object[]{"Student's ID", "Student's name", "Date of Birth", "Gender", "Email", "Phone number",
+                "Father's name", "Mother's name", "Address", "Image path"}));
+            student.getStudentValue(jTable1, "");
+            clearStudent();
+        } else {
+            JOptionPane.showMessageDialog(this, "This student ID doesn't exist");
+        }
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        jTable1.setModel(new DefaultTableModel(null, new Object[]{"Student's ID", "Student's name", "Date of Birth", "Gender", "Email", "Phone number",
+            "Father's name", "Mother's name", "Address", "Image path"}));
+        student.getStudentValue(jTable1, "");
+        searchField.setText(null);
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        try {
+            MessageFormat header = new MessageFormat("Students Information");
+            MessageFormat footer = new MessageFormat("Page {0,number,integer}");
+            jTable1.print(JTable.PrintMode.FIT_WIDTH, header, footer);
+        } catch (PrinterException ex) {
+            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_jButton7ActionPerformed
 
     /**
      * @param args the command line arguments
