@@ -4,22 +4,31 @@
  */
 package student;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Image;
 import java.awt.print.PrinterException;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
 import java.text.MessageFormat;
+import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Vector;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.text.Document;
 import utils.Standardize;
 
 /**
@@ -29,10 +38,14 @@ import utils.Standardize;
 public class Home extends javax.swing.JFrame {
 
     Student student = new Student();
+    Course course = new Course();
+    Score score = new Score();
+    MarkSheet markSheet = new MarkSheet();
     int xx, xy;
     private String imagePath;
     private DefaultTableModel model;
     private int rowIndex;
+    NumberFormat nf = NumberFormat.getInstance();
 
     public Home() {
         initComponents();
@@ -147,18 +160,17 @@ public class Home extends javax.swing.JFrame {
         jLabel57 = new javax.swing.JLabel();
         jLabel56 = new javax.swing.JLabel();
         jTextField13 = new javax.swing.JTextField();
-        jTextField14 = new javax.swing.JTextField();
-        jTextField30 = new javax.swing.JTextField();
-        jTextField31 = new javax.swing.JTextField();
-        jTextField32 = new javax.swing.JTextField();
-        jTextField33 = new javax.swing.JTextField();
-        jTextField34 = new javax.swing.JTextField();
-        jTextField35 = new javax.swing.JTextField();
-        jTextField36 = new javax.swing.JTextField();
-        jTextField37 = new javax.swing.JTextField();
-        jTextField38 = new javax.swing.JTextField();
+        jTextCourse1 = new javax.swing.JTextField();
+        jTextScore1 = new javax.swing.JTextField();
+        jTextCourse2 = new javax.swing.JTextField();
+        jTextScore2 = new javax.swing.JTextField();
+        jTextCourse3 = new javax.swing.JTextField();
+        jTextScore3 = new javax.swing.JTextField();
+        jTextCourse4 = new javax.swing.JTextField();
+        jTextScore4 = new javax.swing.JTextField();
+        jTextCourse5 = new javax.swing.JTextField();
+        jTextScore5 = new javax.swing.JTextField();
         jTextField15 = new javax.swing.JTextField();
-        jTextField16 = new javax.swing.JTextField();
         jPanel23 = new javax.swing.JPanel();
         jPanel24 = new javax.swing.JPanel();
         jLabel37 = new javax.swing.JLabel();
@@ -172,8 +184,8 @@ public class Home extends javax.swing.JFrame {
         jButton22 = new javax.swing.JButton();
         jButton23 = new javax.swing.JButton();
         jButton25 = new javax.swing.JButton();
-        jButton26 = new javax.swing.JButton();
         jButton27 = new javax.swing.JButton();
+        jButton28 = new javax.swing.JButton();
         jPanel27 = new javax.swing.JPanel();
         jPanel28 = new javax.swing.JPanel();
         jPanel21 = new javax.swing.JPanel();
@@ -238,7 +250,9 @@ public class Home extends javax.swing.JFrame {
         jPanel4.setBackground(new java.awt.Color(255, 153, 153));
 
         jPanel3.setBackground(new java.awt.Color(255, 102, 102));
+        jPanel3.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(153, 0, 0), new java.awt.Color(102, 0, 0), new java.awt.Color(204, 51, 0), new java.awt.Color(51, 0, 51)));
 
+        jTextField1.setEditable(false);
         jTextField1.setBackground(new java.awt.Color(204, 204, 204));
         jTextField1.setFont(new java.awt.Font("Noto Sans", 1, 15)); // NOI18N
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
@@ -255,6 +269,11 @@ public class Home extends javax.swing.JFrame {
         jTextField2.setFont(new java.awt.Font("Noto Sans", 1, 15)); // NOI18N
 
         jTextField4.setFont(new java.awt.Font("Noto Sans", 1, 15)); // NOI18N
+        jTextField4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField4ActionPerformed(evt);
+            }
+        });
         jTextField4.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jTextField4KeyTyped(evt);
@@ -433,6 +452,7 @@ public class Home extends javax.swing.JFrame {
         );
 
         jPanel5.setBackground(new java.awt.Color(255, 102, 102));
+        jPanel5.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(153, 0, 0), new java.awt.Color(102, 0, 0), new java.awt.Color(204, 51, 0), new java.awt.Color(51, 0, 51)));
 
         jPanel8.setBackground(new java.awt.Color(204, 0, 0));
         jPanel8.setBorder(new javax.swing.border.MatteBorder(null));
@@ -490,6 +510,7 @@ public class Home extends javax.swing.JFrame {
         );
 
         jPanel9.setBackground(new java.awt.Color(255, 51, 51));
+        jPanel9.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -671,7 +692,10 @@ public class Home extends javax.swing.JFrame {
         jPanel11.setBackground(new java.awt.Color(255, 153, 153));
 
         jPanel12.setBackground(new java.awt.Color(255, 102, 102));
+        jPanel12.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(153, 0, 0), new java.awt.Color(102, 0, 0), new java.awt.Color(204, 51, 0), new java.awt.Color(51, 0, 51)));
 
+        jTextField8.setEditable(false);
+        jTextField8.setBackground(new java.awt.Color(204, 204, 204));
         jTextField8.setFont(new java.awt.Font("Noto Sans", 1, 15)); // NOI18N
         jTextField8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -687,9 +711,26 @@ public class Home extends javax.swing.JFrame {
         jLabel50.setFont(new java.awt.Font("Noto Mono", 1, 15)); // NOI18N
         jLabel50.setText("Student's ID");
 
+        jTextField9.setFont(new java.awt.Font("Liberation Sans", 1, 15)); // NOI18N
+        jTextField9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField9ActionPerformed(evt);
+            }
+        });
+        jTextField9.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField9KeyTyped(evt);
+            }
+        });
+
         jButton10.setBackground(new java.awt.Color(204, 204, 0));
         jButton10.setFont(new java.awt.Font("Noto Mono", 1, 15)); // NOI18N
         jButton10.setText("Search");
+        jButton10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton10ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
         jPanel13.setLayout(jPanel13Layout);
@@ -716,6 +757,10 @@ public class Home extends javax.swing.JFrame {
                     .addComponent(jTextField9))
                 .addContainerGap(8, Short.MAX_VALUE))
         );
+
+        jTextField10.setEditable(false);
+        jTextField10.setBackground(new java.awt.Color(204, 204, 204));
+        jTextField10.setFont(new java.awt.Font("Liberation Sans", 1, 15)); // NOI18N
 
         jLabel15.setFont(new java.awt.Font("Noto Mono", 1, 15)); // NOI18N
         jLabel15.setText("Student's ID");
@@ -795,7 +840,7 @@ public class Home extends javax.swing.JFrame {
             .addGroup(jPanel12Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(21, 21, 21)
                 .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel14)
                     .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -831,6 +876,7 @@ public class Home extends javax.swing.JFrame {
         );
 
         jPanel15.setBackground(new java.awt.Color(255, 102, 102));
+        jPanel15.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(153, 0, 0), new java.awt.Color(102, 0, 0), new java.awt.Color(204, 51, 0), new java.awt.Color(51, 0, 51)));
 
         jPanel16.setBackground(new java.awt.Color(204, 0, 0));
         jPanel16.setBorder(new javax.swing.border.MatteBorder(null));
@@ -854,6 +900,11 @@ public class Home extends javax.swing.JFrame {
 
         jButton12.setFont(new java.awt.Font("Noto Mono", 1, 15)); // NOI18N
         jButton12.setText("Refresh");
+        jButton12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton12ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel16Layout = new javax.swing.GroupLayout(jPanel16);
         jPanel16.setLayout(jPanel16Layout);
@@ -883,6 +934,7 @@ public class Home extends javax.swing.JFrame {
         );
 
         jPanel17.setBackground(new java.awt.Color(255, 51, 51));
+        jPanel17.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -925,14 +977,29 @@ public class Home extends javax.swing.JFrame {
         jButton13.setBackground(new java.awt.Color(204, 204, 0));
         jButton13.setFont(new java.awt.Font("Noto Mono", 1, 15)); // NOI18N
         jButton13.setText("Save");
+        jButton13.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton13ActionPerformed(evt);
+            }
+        });
 
         jButton16.setBackground(new java.awt.Color(204, 204, 0));
         jButton16.setFont(new java.awt.Font("Noto Mono", 1, 15)); // NOI18N
         jButton16.setText("Print");
+        jButton16.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton16ActionPerformed(evt);
+            }
+        });
 
         jButton17.setBackground(new java.awt.Color(204, 204, 0));
         jButton17.setFont(new java.awt.Font("Noto Mono", 1, 15)); // NOI18N
         jButton17.setText("Clear");
+        jButton17.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton17ActionPerformed(evt);
+            }
+        });
 
         jButton18.setBackground(new java.awt.Color(204, 204, 0));
         jButton18.setFont(new java.awt.Font("Noto Mono", 1, 15)); // NOI18N
@@ -1020,6 +1087,7 @@ public class Home extends javax.swing.JFrame {
         jPanel19.setBackground(new java.awt.Color(255, 153, 153));
 
         jPanel20.setBackground(new java.awt.Color(255, 102, 102));
+        jPanel20.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(153, 0, 0), new java.awt.Color(102, 0, 0), new java.awt.Color(204, 51, 0), new java.awt.Color(51, 0, 51)));
 
         jLabel22.setFont(new java.awt.Font("Noto Mono", 1, 15)); // NOI18N
         jLabel22.setText("Semester");
@@ -1032,6 +1100,10 @@ public class Home extends javax.swing.JFrame {
 
         jLabel51.setFont(new java.awt.Font("Noto Mono", 1, 15)); // NOI18N
         jLabel51.setText("Course 3");
+
+        jTextField11.setEditable(false);
+        jTextField11.setBackground(new java.awt.Color(204, 204, 204));
+        jTextField11.setFont(new java.awt.Font("Liberation Sans", 1, 15)); // NOI18N
 
         jLabel52.setFont(new java.awt.Font("Noto Mono", 1, 15)); // NOI18N
         jLabel52.setText("Course 4");
@@ -1047,9 +1119,26 @@ public class Home extends javax.swing.JFrame {
         jLabel55.setFont(new java.awt.Font("Noto Mono", 1, 15)); // NOI18N
         jLabel55.setText("Student's ID");
 
+        jTextField12.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField12KeyTyped(evt);
+            }
+        });
+
         jButton14.setBackground(new java.awt.Color(204, 204, 0));
         jButton14.setFont(new java.awt.Font("Noto Mono", 1, 15)); // NOI18N
         jButton14.setText("Search");
+        jButton14.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton14ActionPerformed(evt);
+            }
+        });
+
+        jTextField29.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField29KeyTyped(evt);
+            }
+        });
 
         jLabel57.setFont(new java.awt.Font("Noto Mono", 1, 15)); // NOI18N
         jLabel57.setText("Semester");
@@ -1094,6 +1183,8 @@ public class Home extends javax.swing.JFrame {
         jLabel56.setFont(new java.awt.Font("Noto Mono", 1, 15)); // NOI18N
         jLabel56.setText("ID");
 
+        jTextField13.setEditable(false);
+        jTextField13.setBackground(new java.awt.Color(204, 204, 204));
         jTextField13.setFont(new java.awt.Font("Noto Sans", 1, 15)); // NOI18N
         jTextField13.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1101,41 +1192,49 @@ public class Home extends javax.swing.JFrame {
             }
         });
 
-        jTextField14.setFont(new java.awt.Font("Liberation Sans", 1, 15)); // NOI18N
+        jTextCourse1.setEditable(false);
+        jTextCourse1.setBackground(new java.awt.Color(204, 204, 204));
+        jTextCourse1.setFont(new java.awt.Font("Liberation Sans", 1, 15)); // NOI18N
 
-        jTextField30.setFont(new java.awt.Font("Liberation Sans", 1, 15)); // NOI18N
-        jTextField30.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField30.setText("0.0");
+        jTextScore1.setFont(new java.awt.Font("Liberation Sans", 1, 15)); // NOI18N
+        jTextScore1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextScore1.setText("0.0");
 
-        jTextField31.setFont(new java.awt.Font("Liberation Sans", 1, 15)); // NOI18N
+        jTextCourse2.setEditable(false);
+        jTextCourse2.setBackground(new java.awt.Color(204, 204, 204));
+        jTextCourse2.setFont(new java.awt.Font("Liberation Sans", 1, 15)); // NOI18N
 
-        jTextField32.setFont(new java.awt.Font("Liberation Sans", 1, 15)); // NOI18N
-        jTextField32.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField32.setText("0.0");
+        jTextScore2.setFont(new java.awt.Font("Liberation Sans", 1, 15)); // NOI18N
+        jTextScore2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextScore2.setText("0.0");
 
-        jTextField33.setFont(new java.awt.Font("Liberation Sans", 1, 15)); // NOI18N
+        jTextCourse3.setEditable(false);
+        jTextCourse3.setBackground(new java.awt.Color(204, 204, 204));
+        jTextCourse3.setFont(new java.awt.Font("Liberation Sans", 1, 15)); // NOI18N
 
-        jTextField34.setFont(new java.awt.Font("Liberation Sans", 1, 15)); // NOI18N
-        jTextField34.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField34.setText("0.0");
+        jTextScore3.setFont(new java.awt.Font("Liberation Sans", 1, 15)); // NOI18N
+        jTextScore3.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextScore3.setText("0.0");
 
-        jTextField35.setFont(new java.awt.Font("Liberation Sans", 1, 15)); // NOI18N
+        jTextCourse4.setEditable(false);
+        jTextCourse4.setBackground(new java.awt.Color(204, 204, 204));
+        jTextCourse4.setFont(new java.awt.Font("Liberation Sans", 1, 15)); // NOI18N
 
-        jTextField36.setFont(new java.awt.Font("Liberation Sans", 1, 15)); // NOI18N
-        jTextField36.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField36.setText("0.0");
+        jTextScore4.setFont(new java.awt.Font("Liberation Sans", 1, 15)); // NOI18N
+        jTextScore4.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextScore4.setText("0.0");
 
-        jTextField37.setFont(new java.awt.Font("Liberation Sans", 1, 15)); // NOI18N
+        jTextCourse5.setEditable(false);
+        jTextCourse5.setBackground(new java.awt.Color(204, 204, 204));
+        jTextCourse5.setFont(new java.awt.Font("Liberation Sans", 1, 15)); // NOI18N
 
-        jTextField38.setFont(new java.awt.Font("Liberation Sans", 1, 15)); // NOI18N
-        jTextField38.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField38.setText("0.0");
+        jTextScore5.setFont(new java.awt.Font("Liberation Sans", 1, 15)); // NOI18N
+        jTextScore5.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextScore5.setText("0.0");
 
+        jTextField15.setEditable(false);
+        jTextField15.setBackground(new java.awt.Color(204, 204, 204));
         jTextField15.setFont(new java.awt.Font("Liberation Sans", 1, 15)); // NOI18N
-
-        jTextField16.setFont(new java.awt.Font("Liberation Sans", 1, 15)); // NOI18N
-        jTextField16.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField16.setText("0.0");
 
         javax.swing.GroupLayout jPanel20Layout = new javax.swing.GroupLayout(jPanel20);
         jPanel20.setLayout(jPanel20Layout);
@@ -1161,20 +1260,19 @@ public class Home extends javax.swing.JFrame {
                             .addComponent(jTextField13)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel20Layout.createSequentialGroup()
                                 .addGroup(jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jTextField15, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextField35, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextField33, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextField31, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextField14, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextField37, javax.swing.GroupLayout.Alignment.LEADING))
+                                    .addComponent(jTextCourse4, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jTextCourse3, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jTextCourse2, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jTextCourse1, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jTextCourse5, javax.swing.GroupLayout.Alignment.LEADING))
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jTextField36, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jTextField34, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jTextField32, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jTextField30, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jTextField38)
-                                    .addComponent(jTextField16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                    .addComponent(jTextScore4, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jTextScore3, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jTextScore2, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jTextScore1, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jTextScore5)))
+                            .addComponent(jTextField15))))
                 .addContainerGap())
         );
         jPanel20Layout.setVerticalGroup(
@@ -1182,7 +1280,7 @@ public class Home extends javax.swing.JFrame {
             .addGroup(jPanel20Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
                 .addGroup(jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel56)
                     .addComponent(jTextField13, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -1193,39 +1291,39 @@ public class Home extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel22)
-                    .addComponent(jTextField15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextField15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel23)
-                    .addComponent(jTextField14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField30, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextCourse1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextScore1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel24)
-                    .addComponent(jTextField31, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField32, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextCourse2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextScore2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel51)
-                    .addComponent(jTextField33, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField34, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextCourse3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextScore3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel52)
                     .addGroup(jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jTextField35, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jTextField36, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jTextCourse4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTextScore4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel54)
                     .addGroup(jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jTextField37, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jTextField38, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jTextCourse5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTextScore5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(38, 38, 38))
         );
 
         jPanel23.setBackground(new java.awt.Color(255, 102, 102));
+        jPanel23.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(153, 0, 0), new java.awt.Color(102, 0, 0), new java.awt.Color(204, 51, 0), new java.awt.Color(51, 0, 51)));
 
         jPanel24.setBackground(new java.awt.Color(204, 0, 0));
         jPanel24.setBorder(new javax.swing.border.MatteBorder(null));
@@ -1249,6 +1347,11 @@ public class Home extends javax.swing.JFrame {
 
         jButton21.setFont(new java.awt.Font("Noto Mono", 1, 15)); // NOI18N
         jButton21.setText("Refresh");
+        jButton21.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton21ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel24Layout = new javax.swing.GroupLayout(jPanel24);
         jPanel24.setLayout(jPanel24Layout);
@@ -1278,17 +1381,18 @@ public class Home extends javax.swing.JFrame {
         );
 
         jPanel25.setBackground(new java.awt.Color(255, 51, 51));
+        jPanel25.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jTable3.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "ID", "Student's ID", "Course 1", "Score 1", "Course 2", "Score 2", "Course 3", "Score 3", "Course 4", "Score 4", "Course 5", "Score 5"
+                "ID", "Student's ID", "Course 1", "Score 1", "Course 2", "Score 2", "Course 3", "Score 3", "Course 4", "Score 4", "Course 5", "Score 5", "Average Score"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, false, true, false
+                false, false, false, false, false, false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -1296,6 +1400,11 @@ public class Home extends javax.swing.JFrame {
             }
         });
         jTable3.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+        jTable3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable3MouseClicked(evt);
+            }
+        });
         jScrollPane3.setViewportView(jTable3);
 
         javax.swing.GroupLayout jPanel25Layout = new javax.swing.GroupLayout(jPanel25);
@@ -1321,18 +1430,29 @@ public class Home extends javax.swing.JFrame {
         jButton22.setBackground(new java.awt.Color(204, 204, 0));
         jButton22.setFont(new java.awt.Font("Noto Mono", 1, 15)); // NOI18N
         jButton22.setText("Save");
+        jButton22.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton22ActionPerformed(evt);
+            }
+        });
 
         jButton23.setBackground(new java.awt.Color(204, 204, 0));
         jButton23.setFont(new java.awt.Font("Noto Mono", 1, 15)); // NOI18N
         jButton23.setText("Update");
+        jButton23.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton23ActionPerformed(evt);
+            }
+        });
 
         jButton25.setBackground(new java.awt.Color(204, 204, 0));
         jButton25.setFont(new java.awt.Font("Noto Mono", 1, 15)); // NOI18N
         jButton25.setText("Print");
-
-        jButton26.setBackground(new java.awt.Color(204, 204, 0));
-        jButton26.setFont(new java.awt.Font("Noto Mono", 1, 15)); // NOI18N
-        jButton26.setText("Clear");
+        jButton25.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton25ActionPerformed(evt);
+            }
+        });
 
         jButton27.setBackground(new java.awt.Color(204, 204, 0));
         jButton27.setFont(new java.awt.Font("Noto Mono", 1, 15)); // NOI18N
@@ -1340,6 +1460,15 @@ public class Home extends javax.swing.JFrame {
         jButton27.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton27ActionPerformed(evt);
+            }
+        });
+
+        jButton28.setBackground(new java.awt.Color(204, 204, 0));
+        jButton28.setFont(new java.awt.Font("Noto Mono", 1, 15)); // NOI18N
+        jButton28.setText("Clear");
+        jButton28.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton28ActionPerformed(evt);
             }
         });
 
@@ -1355,7 +1484,7 @@ public class Home extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jButton25, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton26, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButton28, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton27, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -1368,7 +1497,7 @@ public class Home extends javax.swing.JFrame {
                     .addComponent(jButton22, javax.swing.GroupLayout.DEFAULT_SIZE, 57, Short.MAX_VALUE)
                     .addComponent(jButton23, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton25, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton26, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton28, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton27, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -1423,15 +1552,27 @@ public class Home extends javax.swing.JFrame {
         jPanel27.setBackground(new java.awt.Color(255, 153, 153));
 
         jPanel28.setBackground(new java.awt.Color(255, 102, 102));
+        jPanel28.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(153, 0, 0), new java.awt.Color(102, 0, 0), new java.awt.Color(204, 51, 0), new java.awt.Color(51, 0, 51)));
 
         jPanel21.setBackground(new java.awt.Color(204, 0, 0));
 
         jLabel58.setFont(new java.awt.Font("Noto Mono", 1, 15)); // NOI18N
         jLabel58.setText("Student's ID");
 
+        jTextField17.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField17KeyTyped(evt);
+            }
+        });
+
         jButton15.setBackground(new java.awt.Color(204, 204, 0));
         jButton15.setFont(new java.awt.Font("Noto Mono", 1, 15)); // NOI18N
         jButton15.setText("Search");
+        jButton15.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton15ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel21Layout = new javax.swing.GroupLayout(jPanel21);
         jPanel21.setLayout(jPanel21Layout);
@@ -1505,19 +1646,21 @@ public class Home extends javax.swing.JFrame {
         );
 
         jPanel31.setBackground(new java.awt.Color(255, 102, 102));
+        jPanel31.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(153, 0, 0), new java.awt.Color(102, 0, 0), new java.awt.Color(204, 51, 0), new java.awt.Color(51, 0, 51)));
 
         jPanel33.setBackground(new java.awt.Color(255, 51, 51));
+        jPanel33.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jTable5.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "ID", "Student's ID", "Course 1", "Score 1", "Course 2", "Score 2", "Course 3", "Score 3", "Course 4", "Score 4", "Course 5", "Score 5"
+                "ID", "Student's ID", "Course 1", "Score 1", "Course 2", "Score 2", "Course 3", "Score 3", "Course 4", "Score 4", "Course 5", "Score 5", "Average"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, false, true, false
+                false, false, false, false, false, false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -1554,6 +1697,11 @@ public class Home extends javax.swing.JFrame {
         jButton35.setBackground(new java.awt.Color(204, 204, 0));
         jButton35.setFont(new java.awt.Font("Noto Mono", 1, 15)); // NOI18N
         jButton35.setText("Clear");
+        jButton35.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton35ActionPerformed(evt);
+            }
+        });
 
         jButton36.setBackground(new java.awt.Color(204, 204, 0));
         jButton36.setFont(new java.awt.Font("Noto Mono", 1, 15)); // NOI18N
@@ -1668,7 +1816,12 @@ public class Home extends javax.swing.JFrame {
 
     public void init() {
         tableViewStudent();
+        tableViewCourse();
+        tableViewScore();
+        tableViewScoreView();
         jTextField1.setText(String.valueOf(student.getMax()));
+        jTextField8.setText(String.valueOf(course.getMax()));
+        jTextField13.setText(String.valueOf(score.getMax()));
     }
 
     private void tableViewStudent() {
@@ -1681,9 +1834,39 @@ public class Home extends javax.swing.JFrame {
 
     }
 
+    private void tableViewCourse() {
+        course.getCourseValue(jTable2, "");
+        model = (DefaultTableModel) jTable2.getModel();
+        jTable2.setRowHeight(30);
+        jTable2.setShowGrid(true);
+        jTable2.setGridColor(Color.black);
+        jTable2.setBackground(Color.white);
+
+    }
+
+    private void tableViewScore() {
+        score.getScoreValue(jTable3, "");
+        model = (DefaultTableModel) jTable3.getModel();
+        jTable3.setRowHeight(30);
+        jTable3.setShowGrid(true);
+        jTable3.setGridColor(Color.black);
+        jTable3.setBackground(Color.white);
+
+    }
+    
+    private void tableViewScoreView() {
+        model = (DefaultTableModel) jTable5.getModel();
+        jTable5.setRowHeight(30);
+        jTable5.setShowGrid(true);
+        jTable5.setGridColor(Color.black);
+        jTable5.setBackground(Color.white);
+
+    }
+
     private void clearStudent() {
         jTextField1.setText(String.valueOf(student.getMax()));
-        jTextField1.setText(null);
+        //jTextField1.setText(null);
+        jTextField9.setText(null);
         jTextField2.setText(null);
         jTextField3.setText(null);
         jTextField4.setText(null);
@@ -1696,6 +1879,38 @@ public class Home extends javax.swing.JFrame {
         jTable1.clearSelection();
         imagePath = null;
 
+    }
+
+    public void clearCourse() {
+        jTextField8.setText(String.valueOf(course.getMax()));
+        jTextField10.setText(null);
+        jComboBox5.removeAllItems();
+        jComboBox6.setSelectedIndex(0);
+        jComboBox7.setSelectedIndex(0);
+        jComboBox8.setSelectedIndex(0);
+        jComboBox9.setSelectedIndex(0);
+        jComboBox10.setSelectedIndex(0);
+        jTable2.clearSelection();
+
+    }
+
+    public void clearScore() {
+        jTextField13.setText(String.valueOf(score.getMax()));
+        jTextField12.setText(null);
+        jTextField29.setText(null);
+        jTextField11.setText(null);
+        jTextField15.setText(null);
+        jTextCourse1.setText(null);
+        jTextCourse2.setText(null);
+        jTextCourse3.setText(null);
+        jTextCourse4.setText(null);
+        jTextCourse5.setText(null);
+        jTextScore1.setText("0.0");
+        jTextScore2.setText("0.0");
+        jTextScore3.setText("0.0");
+        jTextScore4.setText("0.0");
+        jTextScore5.setText("0.0");
+        jTable3.clearSelection();
     }
 
     public boolean isEmptyStudent() {
@@ -1792,7 +2007,7 @@ public class Home extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         if (searchField.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Please enter student ID");
+            JOptionPane.showMessageDialog(this, "Search field is empty");
         } else {
             jTable1.setModel(new DefaultTableModel(null, new Object[]{"Student's ID", "Student's name", "Date of Birth", "Gender", "Email", "Phone number",
                 "Father's name", "Mother's name", "Address", "Image path"}));
@@ -1809,7 +2024,14 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_searchField1ActionPerformed
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
-        // TODO add your handling code here:
+        if (searchField1.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Search field is empty");
+        } else {
+            jTable2.setModel(new DefaultTableModel(null, new Object[]{"ID", "Student's ID", "Semester", "Course1", "Course2",
+                "Course3", "Course4", "Course5"}));
+
+            course.getCourseValueTable(jTable2, searchField1.getText());
+        }
     }//GEN-LAST:event_jButton11ActionPerformed
 
     private void searchField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchField2ActionPerformed
@@ -1817,7 +2039,13 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_searchField2ActionPerformed
 
     private void jButton20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton20ActionPerformed
-        // TODO add your handling code here:
+        if (searchField2.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Search field is empty");
+        } else {
+            jTable3.setModel(new DefaultTableModel(null, new Object[]{"ID", "Student's ID", "Semester", "Course1", "Score1", "Course2", "Score2",
+                "Course3", "Score3", "Course4", "Score4", "Course5", "Score5", "Average"}));
+            score.getScoreValue(jTable3, searchField2.getText());
+        }
     }//GEN-LAST:event_jButton20ActionPerformed
 
     private void jComboBox6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox6ActionPerformed
@@ -1898,13 +2126,12 @@ public class Home extends javax.swing.JFrame {
                         String father = jTextField5.getText();
                         String mother = jTextField6.getText();
                         String address = jTextField7.getText();
-                        String imagePath = ""; // Đảm bảo biến này có giá trị hợp lệ khi cần thiết
-
                         student.insert(Integer.parseInt(jTextField1.getText()), name, date, gender, email, phone, father, mother, address, imagePath);
                         jTable1.setModel(new DefaultTableModel(null, new Object[]{"Student's ID", "Student's name", "Date of Birth", "Gender", "Email", "Phone number",
                             "Father's name", "Mother's name", "Address", "Image path"}));
                         student.getStudentValue(jTable1, "");
                         clearStudent();
+                        jTextField1.setText(String.valueOf(student.getMax()));
                     } else {
                         JOptionPane.showMessageDialog(this, "This phone number is already exists");
                     }
@@ -1944,7 +2171,7 @@ public class Home extends javax.swing.JFrame {
                     jTable1.setModel(new DefaultTableModel(null, new Object[]{"Student's ID", "Student's name", "Date of Birth", "Gender", "Email", "Phone number",
                         "Father's name", "Mother's name", "Address", "Image path"}));
                     student.getStudentValue(jTable1, "");
-                    clearStudent();
+
                 }
             } else {
                 JOptionPane.showMessageDialog(this, "This student ID doesn't exist");
@@ -2007,16 +2234,11 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        int id = Integer.parseInt(jTextField1.getText());
-        if (student.isIdExist(id)) {
-            student.delete(id);
-            jTable1.setModel(new DefaultTableModel(null, new Object[]{"Student's ID", "Student's name", "Date of Birth", "Gender", "Email", "Phone number",
-                "Father's name", "Mother's name", "Address", "Image path"}));
-            student.getStudentValue(jTable1, "");
-            clearStudent();
-        } else {
-            JOptionPane.showMessageDialog(this, "This student ID doesn't exist");
-        }
+        student.delete(Integer.parseInt(jTextField1.getText()));
+        jTable1.setModel(new DefaultTableModel(null, new Object[]{"Student's ID", "Student's name", "Date of Birth", "Gender", "Email", "Phone number",
+            "Father's name", "Mother's name", "Address", "Image path"}));
+        student.getStudentValue(jTable1, "");
+        clearStudent();
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -2027,16 +2249,325 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        showPrintPreview(jTable1);
+
+    }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jButton17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton17ActionPerformed
+        clearCourse();
+    }//GEN-LAST:event_jButton17ActionPerformed
+
+    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+        if (jTextField9.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please enter Student's ID");
+        } else {
+            int id = Integer.parseInt(jTextField9.getText());
+            if (course.getId(id)) {
+                jComboBox5.setSelectedIndex(-1);
+                int semester = course.countSemester(id);
+                if (semester >= 0) {
+                    for (int i = 1; i <= semester + 1; i++) {
+                        jComboBox5.addItem(i + "");
+                    }
+                }
+            }
+        }
+    }//GEN-LAST:event_jButton10ActionPerformed
+
+    private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
+        if (jTextField10.getText().isEmpty() || jComboBox5.getItemCount() == 0) {
+            JOptionPane.showMessageDialog(this, "Student id or semester number is missing");
+        } else {
+            int id = course.getMax();
+            int sid = Integer.parseInt(jTextField10.getText());
+            int semesterNo = Integer.parseInt(jComboBox5.getSelectedItem().toString());
+            String course1 = jComboBox6.getSelectedItem().toString();
+            String course2 = jComboBox7.getSelectedItem().toString();
+            String course3 = jComboBox8.getSelectedItem().toString();
+            String course4 = jComboBox9.getSelectedItem().toString();
+            String course5 = jComboBox10.getSelectedItem().toString();
+            if (course.isSemesterExist(sid, semesterNo)) {
+                JOptionPane.showMessageDialog(this, "This student has already taken semester " + semesterNo);
+            } else {
+                if (course.isCourseExist(sid, "course1", course1)) {
+                    JOptionPane.showMessageDialog(this, "This student has already taken " + course1 + "course");
+                } else if (course.isCourseExist(sid, "course2", course2)) {
+                    JOptionPane.showMessageDialog(this, "This student has already taken " + course2 + "course");
+                } else if (course.isCourseExist(sid, "course3", course3)) {
+                    JOptionPane.showMessageDialog(this, "This student has already taken " + course3 + "course");
+                } else if (course.isCourseExist(sid, "course4", course4)) {
+                    JOptionPane.showMessageDialog(this, "This student has already taken " + course4 + "course");
+                } else if (course.isCourseExist(sid, "course5", course5)) {
+                    JOptionPane.showMessageDialog(this, "This student has already taken " + course5 + "course");
+                } else {
+                    course.insert(id, sid, semesterNo, course1, course2, course3, course4, course5);
+                    jTable2.setModel(new DefaultTableModel(null, new Object[]{"ID", "Student's ID", "Semester", "Course1", "Course2", "Course3", "Course4", "Course5"}));
+                    course.getCourseValue(jTable2, searchField.getText());
+                    clearCourse();
+
+                }
+            }
+
+        }
+    }//GEN-LAST:event_jButton13ActionPerformed
+
+    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField4ActionPerformed
+
+    private void jTextField9KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField9KeyTyped
+        if (!Character.isDigit(evt.getKeyChar())) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTextField9KeyTyped
+
+    private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
+        jTable2.setModel(new DefaultTableModel(null, new Object[]{"ID", "Student's ID", "Semester", "Course1", "Course2",
+            "Course3", "Course4", "Course5"}));
+        course.getCourseValue(jTable2, "");
+        searchField1.setText(null);
+    }//GEN-LAST:event_jButton12ActionPerformed
+
+    private void showPrintPreview(JTable originalTable) {
+        // Tạo frame preview
+        JFrame previewFrame = new JFrame("Print Preview");
+        previewFrame.setSize(800, 600);
+        previewFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+        // Clone bảng gốc
+        DefaultTableModel originalModel = (DefaultTableModel) originalTable.getModel();
+        DefaultTableModel copyModel = new DefaultTableModel();
+
+        // Copy cột
+        for (int i = 0; i < originalModel.getColumnCount(); i++) {
+            copyModel.addColumn(originalModel.getColumnName(i));
+        }
+
+        // Copy dữ liệu
+        for (int i = 0; i < originalModel.getRowCount(); i++) {
+            Vector<Object> row = (Vector<Object>) originalModel.getDataVector().get(i);
+            copyModel.addRow(row.toArray());
+        }
+
+        JTable previewTable = new JTable(copyModel);
+        JScrollPane scrollPane = new JScrollPane(previewTable);
+
+        JButton printButton = new JButton("Print");
+        printButton.addActionListener(e -> {
+            try {
+                if (originalTable.equals(jTable2)) {
+                    MessageFormat header = new MessageFormat("All student courses Information");
+                    MessageFormat footer = new MessageFormat("Page {0,number,integer}");
+                    previewTable.print(JTable.PrintMode.FIT_WIDTH, header, footer);
+                } else if (originalTable.equals(jTable1)) {
+                    MessageFormat header = new MessageFormat("Student Information");
+                    MessageFormat footer = new MessageFormat("Page {0,number,integer}");
+                    previewTable.print(JTable.PrintMode.FIT_WIDTH, header, footer);
+                } else if (originalTable.equals(jTable3)) {
+                    MessageFormat header = new MessageFormat("Student Scores Information");
+                    MessageFormat footer = new MessageFormat("Page {0,number,integer}");
+                    previewTable.print(JTable.PrintMode.FIT_WIDTH, header, footer);
+                }
+            } catch (PrinterException ex) {
+                Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+
+        JPanel bottomPanel = new JPanel();
+        bottomPanel.add(printButton);
+
+        previewFrame.add(scrollPane, BorderLayout.CENTER);
+        previewFrame.add(bottomPanel, BorderLayout.SOUTH);
+        previewFrame.setLocationRelativeTo(null);
+        previewFrame.setVisible(true);
+    }
+
+    private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
+        showPrintPreview(jTable2);
+    }//GEN-LAST:event_jButton16ActionPerformed
+
+    private void jTextField9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField9ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField9ActionPerformed
+
+    private void jTextField12KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField12KeyTyped
+        if (!Character.isDigit(evt.getKeyChar())) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTextField12KeyTyped
+
+    private void jTextField29KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField29KeyTyped
+        if (!Character.isDigit(evt.getKeyChar())) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTextField29KeyTyped
+
+    private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
+        if (jTextField12.getText().isEmpty() || jTextField29.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Student's ID or semester is missing");
+        } else {
+            int sid = Integer.parseInt(jTextField12.getText());
+            int semNo = Integer.parseInt(jTextField29.getText());
+            score.getDetails(sid, semNo);
+        }
+    }//GEN-LAST:event_jButton14ActionPerformed
+
+    private void jButton22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton22ActionPerformed
+        if (!jTextField11.getText().isEmpty()) {
+            if (!score.isIdExist(Integer.parseInt(jTextField13.getText()))) {
+                int sid = Integer.parseInt(jTextField11.getText());
+                int semesterNo = Integer.parseInt(jTextField15.getText());
+                if (!score.isSidSemesterNoExist(sid, semesterNo)) {
+                    if (isNumeric(jTextScore1.getText()) && isNumeric(jTextScore2.getText()) && isNumeric(jTextScore3.getText()) && isNumeric(jTextScore4.getText()) && isNumeric(jTextScore5.getText())) {
+                        int id = score.getMax();
+
+                        String course1 = jTextCourse1.getText();
+                        String course2 = jTextCourse2.getText();
+                        String course3 = jTextCourse3.getText();
+                        String course4 = jTextCourse4.getText();
+                        String course5 = jTextCourse5.getText();
+
+                        double score1 = Double.parseDouble(jTextScore1.getText());
+                        double score2 = Double.parseDouble(jTextScore2.getText());
+                        double score3 = Double.parseDouble(jTextScore3.getText());
+                        double score4 = Double.parseDouble(jTextScore4.getText());
+                        double score5 = Double.parseDouble(jTextScore5.getText());
+
+                        double average = (score1 + score2 + score3 + score4 + score5) / 5;
+
+                        nf.setMaximumFractionDigits(2);
+
+                        score.insert(id, sid, semesterNo, course1, course2, course3, course4, course5, score1, score2, score3, score4, score5, Double.parseDouble(nf.format(average)));
+
+                        jTable3.setModel(new DefaultTableModel(null, new Object[]{"ID", "Student's ID", "Semester", "Course1", "Score1", "Course2", "Score2",
+                            "Course3", "Score3", "Course4", "Score4", "Course5", "Score5", "Average"}));
+                        score.getScoreValue(jTable3, "");
+                        clearScore();
+
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(this, "Semester " + semesterNo + "score already added");
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Score id already exists");
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "No student selected");
+        }
+    }//GEN-LAST:event_jButton22ActionPerformed
+
+    private void jTable3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable3MouseClicked
+        model = (DefaultTableModel) jTable3.getModel();
+        rowIndex = jTable3.getSelectedRow();
+        jTextField13.setText(model.getValueAt(rowIndex, 0).toString());
+        jTextField11.setText(model.getValueAt(rowIndex, 1).toString());
+        jTextField15.setText(model.getValueAt(rowIndex, 2).toString());
+        
+        jTextCourse1.setText(model.getValueAt(rowIndex, 3).toString());
+        jTextCourse2.setText(model.getValueAt(rowIndex, 5).toString());
+        jTextCourse3.setText(model.getValueAt(rowIndex, 7).toString());
+        jTextCourse4.setText(model.getValueAt(rowIndex, 9).toString());
+        jTextCourse5.setText(model.getValueAt(rowIndex, 11).toString());
+        
+        jTextScore1.setText(model.getValueAt(rowIndex, 4).toString());
+        jTextScore2.setText(model.getValueAt(rowIndex, 6).toString());
+        jTextScore3.setText(model.getValueAt(rowIndex, 8).toString());
+        jTextScore4.setText(model.getValueAt(rowIndex, 10).toString());
+        jTextScore5.setText(model.getValueAt(rowIndex, 12).toString());
+    }//GEN-LAST:event_jTable3MouseClicked
+
+    private void jButton23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton23ActionPerformed
+        int id = Integer.parseInt(jTextField13.getText());
+        if (score.isIdExist(id)) {
+            if (isNumeric(jTextScore1.getText()) && isNumeric(jTextScore2.getText()) && isNumeric(jTextScore3.getText()) && isNumeric(jTextScore4.getText()) && isNumeric(jTextScore5.getText())) {
+                double score1 = Double.parseDouble(jTextScore1.getText());
+                double score2 = Double.parseDouble(jTextScore2.getText());
+                double score3 = Double.parseDouble(jTextScore3.getText());
+                double score4 = Double.parseDouble(jTextScore4.getText());
+                double score5 = Double.parseDouble(jTextScore5.getText());
+
+                double average = (score1 + score2 + score3 + score4 + score5) / 5;
+
+                nf.setMaximumFractionDigits(2);
+
+                score.update(id, score1, score2, score3, score4, score5, Double.parseDouble(nf.format(average)));
+
+                jTable3.setModel(new DefaultTableModel(null, new Object[]{"ID", "Student's ID", "Semester", "Course1", "Score1", "Course2", "Score2",
+                    "Course3", "Score3", "Course4", "Score4", "Course5", "Score5", "Average"}));
+                score.getScoreValue(jTable3, "");
+                clearScore();
+            } 
+        } else {
+            JOptionPane.showMessageDialog(this, "Score id doesn't exist");
+        }
+    }//GEN-LAST:event_jButton23ActionPerformed
+
+    private void jButton25ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton25ActionPerformed
         try {
-            MessageFormat header = new MessageFormat("Students Information");
+            MessageFormat header = new MessageFormat("Students Scores");
             MessageFormat footer = new MessageFormat("Page {0,number,integer}");
-            jTable1.print(JTable.PrintMode.FIT_WIDTH, header, footer);
+            jTable3.print(JTable.PrintMode.FIT_WIDTH, header, footer);
         } catch (PrinterException ex) {
             Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-    }//GEN-LAST:event_jButton7ActionPerformed
+    }//GEN-LAST:event_jButton25ActionPerformed
 
+    private void jButton21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton21ActionPerformed
+        jTable3.setModel(new DefaultTableModel(null, new Object[]{"ID", "Student's ID", "Semester", "Course1", "Score1", "Course2", "Score2",
+            "Course3", "Score3", "Course4", "Score4", "Course5", "Score5", "Average"}));
+        score.getScoreValue(jTable3, "");
+        searchField2.setText(null);
+    }//GEN-LAST:event_jButton21ActionPerformed
+
+    private void jButton28ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton28ActionPerformed
+        clearScore();
+    }//GEN-LAST:event_jButton28ActionPerformed
+
+    private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
+        if (jTextField17.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "please enter Student's ID");
+        } else {
+            int sid = Integer.parseInt(jTextField17.getText());
+            if (markSheet.isIdExist(sid)) {
+                jTable5.setModel(new DefaultTableModel(null, new Object[]{"ID", "Student's ID", "Semester", "Course1", "Score1", "Course2", "Score2",
+            "Course3", "Score3", "Course4", "Score4", "Course5", "Score5", "Average"}));
+                markSheet.getScoreValue(jTable5, sid);
+                String gpa = String.valueOf(String.format("%.2f", markSheet.getGPA(sid)));
+                jLabel26.setText("GPA : " + gpa);
+            } else {
+                JOptionPane.showMessageDialog(this, "No scores found");
+            }
+        }
+    }//GEN-LAST:event_jButton15ActionPerformed
+
+    private void jTextField17KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField17KeyTyped
+        if (!Character.isDigit(evt.getKeyChar())) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTextField17KeyTyped
+
+    private void jButton35ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton35ActionPerformed
+        jTextField17.setText(null);
+        jLabel26.setText("GPA : 0.0");
+        jTable5.setModel(new DefaultTableModel(null, new Object[]{"ID", "Student's ID", "Semester", "Course1", "Score1", "Course2", "Score2",
+            "Course3", "Score3", "Course4", "Score4", "Course5", "Score5", "Average"}));
+    }//GEN-LAST:event_jButton35ActionPerformed
+
+    private boolean isNumeric(String s) {
+
+        try {
+            double d = Double.parseDouble(s);
+            if (d >= 0.0 && d <= 4.0) {
+                return true;
+            } else {
+                JOptionPane.showMessageDialog(this, "Please enter valid value, it must be between 0.0 to 4.0");
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Please enter valid value, it must be number between 0.0 to 4.0");
+        }
+        return false;
+    }
     /**
      * @param args the command line arguments
      */
@@ -2090,8 +2621,8 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JButton jButton22;
     private javax.swing.JButton jButton23;
     private javax.swing.JButton jButton25;
-    private javax.swing.JButton jButton26;
     private javax.swing.JButton jButton27;
+    private javax.swing.JButton jButton28;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton34;
     private javax.swing.JButton jButton35;
@@ -2186,33 +2717,32 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JTable jTable2;
     private javax.swing.JTable jTable3;
     private javax.swing.JTable jTable5;
+    public static javax.swing.JTextField jTextCourse1;
+    public static javax.swing.JTextField jTextCourse2;
+    public static javax.swing.JTextField jTextCourse3;
+    public static javax.swing.JTextField jTextCourse4;
+    public static javax.swing.JTextField jTextCourse5;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField10;
-    private javax.swing.JTextField jTextField11;
+    public static javax.swing.JTextField jTextField10;
+    public static javax.swing.JTextField jTextField11;
     private javax.swing.JTextField jTextField12;
     private javax.swing.JTextField jTextField13;
-    private javax.swing.JTextField jTextField14;
-    private javax.swing.JTextField jTextField15;
-    private javax.swing.JTextField jTextField16;
+    public static javax.swing.JTextField jTextField15;
     private javax.swing.JTextField jTextField17;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField29;
     private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField30;
-    private javax.swing.JTextField jTextField31;
-    private javax.swing.JTextField jTextField32;
-    private javax.swing.JTextField jTextField33;
-    private javax.swing.JTextField jTextField34;
-    private javax.swing.JTextField jTextField35;
-    private javax.swing.JTextField jTextField36;
-    private javax.swing.JTextField jTextField37;
-    private javax.swing.JTextField jTextField38;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
     private javax.swing.JTextField jTextField8;
     private javax.swing.JTextField jTextField9;
+    private javax.swing.JTextField jTextScore1;
+    private javax.swing.JTextField jTextScore2;
+    private javax.swing.JTextField jTextScore3;
+    private javax.swing.JTextField jTextScore4;
+    private javax.swing.JTextField jTextScore5;
     private javax.swing.JTextField searchField;
     private javax.swing.JTextField searchField1;
     private javax.swing.JTextField searchField2;
