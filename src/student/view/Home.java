@@ -2267,6 +2267,8 @@ public class Home extends javax.swing.JFrame {
             "Father's name", "Mother's name", "Address", "Image path"}));
         student.getStudentValue(jTable1, "");
         clearStudent();
+        clearScore();
+        clearCourse();
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -2291,7 +2293,7 @@ public class Home extends javax.swing.JFrame {
         } else {
             int id = Integer.parseInt(jTextField9.getText());
             if (course.getId(id)) {
-                jComboBox5.setSelectedIndex(-1);
+                jComboBox5.removeAllItems();
                 int semester = course.countSemester(id);
                 if (semester >= 0) {
                     for (int i = 1; i <= semester + 1; i++) {
