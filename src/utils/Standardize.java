@@ -10,7 +10,7 @@ import java.util.Scanner;
  *
  * @author juan
  */
-public class Standardize {
+    public class Standardize {
     
     public static String name(String s) {
         String res = "";
