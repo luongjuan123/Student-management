@@ -27,7 +27,7 @@ This is a Java-based Student Management System that allows administrators to man
 
 ## Technologies Used
 
-- Java 8+
+- Java 
 - Swing for GUI
 - MySQL for database
 - JDBC for database connectivity
@@ -52,7 +52,6 @@ The system uses the following tables:
 
 1. **Database Setup**:
    - Create a MySQL database named `students_management`
-   - Import the provided SQL schema (if available)
    - Update database credentials in `MyConnection.java`
    - SQL code :
   ```sql
@@ -126,7 +125,6 @@ CREATE TABLE `score` (
      ```
 
 3. **Running the Application**:
-   - Compile all Java files
    - Run `student.view.Login` as the main class
 
 ## Usage
@@ -147,9 +145,11 @@ CREATE TABLE `score` (
   - Implement proper password hashing for admin accounts
   - Restrict database user permissions
 
-## License
+## References
 
-This project is currently unlicensed. Please contact the author for usage permissions.
+- [PCODEP](https://www.procodeplan.com/) (For design)
+- [Tutorial Point](https://www.tutorialspoint.com/swing/swing_layouts.htm) (For Java Swing)
+- [Database Star](https://www.youtube.com/@DatabaseStar) (For Database)
 
 ## Author
 
