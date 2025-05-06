@@ -149,7 +149,9 @@ CREATE TABLE `score` (
 
 ## References
 
-[PCODEP](https://www.procodeplan.com/)
+- [PCODEP](https://www.procodeplan.com/) 
+- [Tutorial Point](https://www.tutorialspoint.com/swing/swing_layouts.htm)
+- [Database Star](https://www.youtube.com/@DatabaseStar)
 
 ## Author
 
