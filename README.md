@@ -126,7 +126,6 @@ CREATE TABLE `score` (
      ```
 
 3. **Running the Application**:
-   - Compile all Java files
    - Run `student.view.Login` as the main class
 
 ## Usage
@@ -149,9 +148,9 @@ CREATE TABLE `score` (
 
 ## References
 
-- [PCODEP](https://www.procodeplan.com/) 
-- [Tutorial Point](https://www.tutorialspoint.com/swing/swing_layouts.htm)
-- [Database Star](https://www.youtube.com/@DatabaseStar)
+- [PCODEP](https://www.procodeplan.com/) (For design)
+- [Tutorial Point](https://www.tutorialspoint.com/swing/swing_layouts.htm) (For Java Swing)
+- [Database Star](https://www.youtube.com/@DatabaseStar) (For Database)
 
 ## Author
 
