@@ -33,7 +33,7 @@ import javax.swing.JTable;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.Document;
-import utils.Standardize;
+import myapp.utils.Standardize;
 
 /**
  *

@@ -1,6 +1,6 @@
 package myapp.models;
 
-import db.MyConnection;
+import myapp.db.MyConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

@@ -5,7 +5,7 @@
 package myapp.view;
 
 import java.sql.Statement;
-import db.MyConnection;
+import myapp.db.MyConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
