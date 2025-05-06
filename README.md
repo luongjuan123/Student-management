@@ -147,9 +147,9 @@ CREATE TABLE `score` (
   - Implement proper password hashing for admin accounts
   - Restrict database user permissions
 
-## License
+## References
 
-This project is currently unlicensed. Please contact the author for usage permissions.
+[PCODEP](https://www.procodeplan.com/)
 
 ## Author
 
