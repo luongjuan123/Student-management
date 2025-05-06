@@ -27,7 +27,7 @@ This is a Java-based Student Management System that allows administrators to man
 
 ## Technologies Used
 
-- Java 8+
+- Java 
 - Swing for GUI
 - MySQL for database
 - JDBC for database connectivity
