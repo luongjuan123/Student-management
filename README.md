@@ -52,7 +52,6 @@ The system uses the following tables:
 
 1. **Database Setup**:
    - Create a MySQL database named `students_management`
-   - Import the provided SQL schema (if available)
    - Update database credentials in `MyConnection.java`
    - SQL code :
   ```sql
