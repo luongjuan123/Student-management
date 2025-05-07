@@ -7,7 +7,7 @@ This is a Java-based Student Management System that allows administrators to man
 ## Features
 
 - **Student Management**
-  - Add, update, and delete student records
+  - Add, update, and delete student 
   - Store student details including name, date of birth, gender, contact information, and family details
   - Upload and store student images
 
