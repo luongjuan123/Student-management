@@ -7,13 +7,12 @@
             <file>file:/home/juan/NetBeansProjects/JavaApplication1/src/myapp/models/Course.java</file>
             <file>file:/home/juan/NetBeansProjects/JavaApplication1/src/myapp/view/Login.java</file>
             <file>file:/home/juan/NetBeansProjects/JavaApplication1/src/myapp/models/Student.java</file>
-            <file>file:/home/juan/NetBeansProjects/JavaApplication1/src/db/MyConnection.java</file>
             <file>file:/home/juan/NetBeansProjects/JavaApplication1/src/myapp/models/Person.java</file>
             <file>file:/home/juan/NetBeansProjects/JavaApplication1/src/myapp/models/Score.java</file>
             <file>file:/home/juan/NetBeansProjects/JavaApplication1/src/myapp/models/MarkSheet.java</file>
-            <file>file:/home/juan/NetBeansProjects/JavaApplication1/src/utils/Standardize.java</file>
             <file>file:/home/juan/NetBeansProjects/JavaApplication1/src/myapp/models/UserAdmin.java</file>
             <file>file:/home/juan/NetBeansProjects/JavaApplication1/src/myapp/models/User.java</file>
+            <file>file:/home/juan/NetBeansProjects/JavaApplication1/src/myapp/utils/Standardize.java</file>
         </group>
     </open-files>
 </project-private>
